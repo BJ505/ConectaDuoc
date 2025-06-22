@@ -5,4 +5,3 @@ com\conectaduoc\controller\PostCategoryController.class
 com\conectaduoc\repository\PostCategoryRepository.class
 com\conectaduoc\service\PostCategoryService.class
 com\conectaduoc\model\PostCategory.class
-com\conectaduoc\service\CustomUserDetailsService.class

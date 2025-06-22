@@ -25,7 +25,7 @@ public class AppUser {
     private String center;
 
     @NotNull(message = "las politicas no puede estar vacío")
-    private String policies;
+    private Integer policies;
 
     public String getEmail() {
         return email;
@@ -65,5 +65,13 @@ public class AppUser {
 
     public void setCenter(String center) {
         this.center = center;
+    }
+
+    public Integer getPolicies() {
+        return policies;
+    }
+
+    public void setPolicies(Integer policies) {
+        this.policies = policies;
     }
 }
