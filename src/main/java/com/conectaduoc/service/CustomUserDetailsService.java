@@ -6,21 +6,21 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.conectaduoc.model.Usuario;
-import com.conectaduoc.repository.UsuarioRepository;
+import com.conectaduoc.model.AppUser;
+import com.conectaduoc.repository.AppUserRepository;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
-    private final UsuarioRepository usuarioRepository;
+    private final AppUserRepository usuarioRepository;
 
-    public CustomUserDetailsService(UsuarioRepository usuarioRepository) {
+    public CustomUserDetailsService(AppUserRepository usuarioRepository) {
         this.usuarioRepository = usuarioRepository;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Usuario usuario = usuarioRepository.findByEmail(username)
+        AppUser usuario = usuarioRepository.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado: " + username));
 
         // Construir UserDetails desde la entidad Usuario

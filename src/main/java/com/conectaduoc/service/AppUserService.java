@@ -1,0 +1,36 @@
+package com.conectaduoc.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.conectaduoc.model.AppUser;
+import com.conectaduoc.repository.AppUserRepository;
+
+@Service
+public class AppUserService {
+    @Autowired
+    private AppUserRepository usuarioRepository;
+
+    public List<AppUser> listarUsuarios() {
+        return usuarioRepository.findAll();
+    }
+
+    public Optional<AppUser> obtenerUsuarioPorEmail(String email) {
+        return usuarioRepository.findByEmail(email);
+    }
+
+    public AppUser guardarUsuario(AppUser usuario) {
+        return usuarioRepository.save(usuario);
+    }
+
+    public void eliminarUsuario(String email) {
+        usuarioRepository.deleteByEmail(email);
+    }
+
+    public Optional<AppUser> login(String email, String password) {
+        return usuarioRepository.findByEmailAndPassword(email, password);
+    }
+}
