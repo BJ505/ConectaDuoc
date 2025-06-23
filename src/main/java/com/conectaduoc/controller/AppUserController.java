@@ -25,7 +25,7 @@ import jakarta.validation.Valid;
 @RequestMapping("/api/usuarios")
 @Validated
 public class AppUserController {
-    
+
     @Autowired
     private AppUserService usuarioService;
 
@@ -55,7 +55,8 @@ public class AppUserController {
     public ResponseEntity<Void> eliminarUsuario(@PathVariable String email) {
         // Verifica si el usuario existe, si no, lanza la excepción
         usuarioService.obtenerUsuarioPorEmail(email)
-                .orElseThrow(() -> new ResourceNotFoundException("El usuario con email " + email + " no fue encontrado."));
+                .orElseThrow(
+                        () -> new ResourceNotFoundException("El usuario con email " + email + " no fue encontrado."));
 
         // Elimina el usuario si existe
         usuarioService.eliminarUsuario(email);
@@ -65,14 +66,23 @@ public class AppUserController {
 
     // Actualizar un usuario existente con manejo de excepción
     @PutMapping("/{email}")
-    public ResponseEntity<AppUser> actualizarUsuario(@PathVariable String email, @Valid @RequestBody AppUser detallesUsuario) {
+    public ResponseEntity<AppUser> actualizarUsuario(@PathVariable String email,
+            @Valid @RequestBody AppUser detallesUsuario) {
         AppUser usuario = usuarioService.obtenerUsuarioPorEmail(email)
-                .orElseThrow(() -> new ResourceNotFoundException("El usuario con email " + email + " no fue encontrado."));
+                .orElseThrow(
+                        () -> new ResourceNotFoundException("El usuario con email " + email + " no fue encontrado."));
 
         usuario.setEmail(detallesUsuario.getEmail());
-        usuario.setPassword(detallesUsuario.getPassword());
         usuario.setRole(detallesUsuario.getRole());
         AppUser usuarioActualizado = usuarioService.guardarUsuario(usuario);
         return ResponseEntity.ok(usuarioActualizado);
     }
+
+    /* Endpoints Adicionales */
+    @GetMapping("/exists/{email}")
+    public ResponseEntity<Boolean> checkUserExists(@PathVariable String email) {
+        boolean exists = usuarioService.obtenerUsuarioPorEmail(email).isPresent();
+        return ResponseEntity.ok(exists);
+    }
+
 }

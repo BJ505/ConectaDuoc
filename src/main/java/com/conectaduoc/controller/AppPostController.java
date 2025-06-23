@@ -15,7 +15,7 @@ import com.conectaduoc.service.AppPostService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/post")
+@RequestMapping("/api/post")
 @Validated
 public class AppPostController {
 
@@ -23,9 +23,21 @@ public class AppPostController {
     private AppPostService postService;
 
     // Listar todos los posts
-    @GetMapping
+/*     @GetMapping
     public ResponseEntity<List<AppPost>> listPost() {
         List<AppPost> posts = postService.listPosts();
+        return ResponseEntity.ok(posts);
+    } */
+
+    // Listar posts, opcionalmente por categoría
+    @GetMapping
+    public ResponseEntity<List<AppPost>> listPost(@RequestParam(required = false) Long idCategory) {
+        List<AppPost> posts;
+        if (idCategory != null) {
+            posts = postService.findByCategory(idCategory);
+        } else {
+            posts = postService.listPosts();
+        }
         return ResponseEntity.ok(posts);
     }
 

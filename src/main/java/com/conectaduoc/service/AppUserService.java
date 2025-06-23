@@ -30,7 +30,4 @@ public class AppUserService {
         usuarioRepository.deleteByEmail(email);
     }
 
-    public Optional<AppUser> login(String email, String password) {
-        return usuarioRepository.findByEmailAndPassword(email, password);
-    }
 }

@@ -34,5 +34,9 @@ public class AppPostService {
     public List<AppPost> findPostByIdUser(int idUser) {
         return postRepository.findByIdUser(idUser);
     }
-}
 
+    public List<AppPost> findByCategory(Long idCategory) {
+        return postRepository.findByIdCategory(idCategory);
+    }
+
+}

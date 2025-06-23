@@ -20,17 +20,18 @@ import com.conectaduoc.service.PostCategoryService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/postcategory")
+@RequestMapping("/api/post-category")
 @Validated
 public class PostCategoryController {
-    
+
     @Autowired
     private PostCategoryService postCategoryService;
 
-    //Listar todas las categorías de publicaciones
+    // Listar todas las categorías de publicaciones
     @GetMapping
     public ResponseEntity<List<PostCategory>> listPostCategory() {
         List<PostCategory> postCategories = postCategoryService.listPostCategory();
+        System.out.println("CATEGORÍAS LEÍDAS: " + postCategories.size());
         return ResponseEntity.ok(postCategories);
     }
 
@@ -44,7 +45,8 @@ public class PostCategoryController {
     @GetMapping("/{id}")
     public ResponseEntity<PostCategory> obtenerPostCategory(@PathVariable Long id) {
         PostCategory postCategory = postCategoryService.getPostCategory(id)
-                .orElseThrow(() -> new ResourceNotFoundException("La categoría de publicación con ID " + id + " no fue encontrada."));
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "La categoría de publicación con ID " + id + " no fue encontrada."));
         return ResponseEntity.ok(postCategory);
     }
 
@@ -53,7 +55,8 @@ public class PostCategoryController {
     public ResponseEntity<Void> eliminarPostCategory(@PathVariable Long id) {
         // Verifica si la categoría de publicación existe, si no, lanza la excepción
         postCategoryService.getPostCategory(id)
-                .orElseThrow(() -> new ResourceNotFoundException("La categoría de publicación con ID " + id + " no fue encontrada."));
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "La categoría de publicación con ID " + id + " no fue encontrada."));
 
         // Elimina la categoría de publicación si existe
         postCategoryService.DeletePostCategory(id);
@@ -63,9 +66,11 @@ public class PostCategoryController {
 
     // Actualizar una categoría de publicación existente con manejo de excepción
     @PostMapping("/{id}")
-    public ResponseEntity<PostCategory> actualizarPostCategory(@PathVariable Long id, @Valid @RequestBody PostCategory postCategoryDetails) {
+    public ResponseEntity<PostCategory> actualizarPostCategory(@PathVariable Long id,
+            @Valid @RequestBody PostCategory postCategoryDetails) {
         PostCategory postCategory = postCategoryService.getPostCategory(id)
-                .orElseThrow(() -> new ResourceNotFoundException("La categoría de publicación con ID " + id + " no fue encontrada."));
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "La categoría de publicación con ID " + id + " no fue encontrada."));
 
         // Actualizar los campos necesarios
         postCategory.setName(postCategoryDetails.getName());
@@ -73,5 +78,11 @@ public class PostCategoryController {
 
         PostCategory updatedPostCategory = postCategoryService.savPostCategory(postCategory);
         return ResponseEntity.ok(updatedPostCategory);
+    }
+
+    @GetMapping("/test-categories")
+    public String testCategories() {
+        List<PostCategory> all = postCategoryService.listPostCategory();
+        return "Hay " + all.size() + " categorías.";
     }
 }

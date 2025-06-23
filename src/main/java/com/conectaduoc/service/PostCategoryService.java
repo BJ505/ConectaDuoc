@@ -16,7 +16,8 @@ public class PostCategoryService {
     private PostCategoryRepository postCategoryRepository;
 
     public List<PostCategory> listPostCategory() {
-        return postCategoryRepository.findAll();
+        List<PostCategory> categorias = postCategoryRepository.findAll();
+        return categorias;
     }
 
     public Optional<PostCategory> getPostCategory(Long id) {

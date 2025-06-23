@@ -14,10 +14,6 @@ public class AppUser {
     @Size(min = 5, max = 100, message = "El nombre de usuario debe tener entre 5 y 100 caracteres")
     private String name;
 
-    @NotNull(message = "La contraseña no puede estar vacía")
-    @Size(min = 8, message = "La contraseña debe tener minimo 8 caracteres")
-    private String password;
-
     @NotNull(message = "el rol no puede estar vacío")
     private String role;
 
@@ -41,14 +37,6 @@ public class AppUser {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getRole() {
