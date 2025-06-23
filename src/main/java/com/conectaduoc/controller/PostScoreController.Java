@@ -15,7 +15,7 @@ import com.conectaduoc.service.Score;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/score")
+@RequestMapping("/api/score")
 @Validated
 public class ScoreController {
 

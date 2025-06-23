@@ -15,7 +15,7 @@ import com.conectaduoc.service.PostCommentService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/comment")
+@RequestMapping("/api/comment")
 @Validated
 public class PostCommentController {
 

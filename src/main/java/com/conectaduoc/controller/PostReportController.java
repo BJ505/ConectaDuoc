@@ -14,7 +14,7 @@ import com.conectaduoc.model.PostReport;
 import com.conectaduoc.service.PostReportService;
 
 @RestController
-@RequestMapping("/report")
+@RequestMapping("/api/report")
 @Validated
 public class PostReportController {
     

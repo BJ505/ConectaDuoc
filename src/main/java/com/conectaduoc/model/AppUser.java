@@ -1,6 +1,9 @@
 package com.conectaduoc.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -8,6 +11,11 @@ import jakarta.validation.constraints.Size;
 @Entity
 public class AppUser {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID_USER")
+    private Long idUser;
+
+    @Column(name = "EMAIL", unique = true, nullable = false)
     private String email;
 
     @NotNull(message = "El nombre no puede estar vacío")
@@ -22,6 +30,14 @@ public class AppUser {
 
     @NotNull(message = "las politicas no puede estar vacío")
     private Integer policies;
+
+    public Long getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(Long idUser) {
+        this.idUser = idUser;
+    }
 
     public String getEmail() {
         return email;
