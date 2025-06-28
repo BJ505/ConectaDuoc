@@ -85,4 +85,12 @@ public class AppUserController {
         return ResponseEntity.ok(exists);
     }
 
+    // Obtener un usuario por su ID (numérico) con manejo de excepción
+    @GetMapping("/id/{idUser}")
+    public ResponseEntity<AppUser> obtenerUsuarioPorId(@PathVariable Long idUser) {
+        AppUser usuario = usuarioService.obtenerUsuarioPorId(idUser)
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado con id: " + idUser));
+        return ResponseEntity.ok(usuario);
+    }
+
 }

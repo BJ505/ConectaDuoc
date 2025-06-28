@@ -23,11 +23,13 @@ public class AppPostController {
     private AppPostService postService;
 
     // Listar todos los posts
-/*     @GetMapping
-    public ResponseEntity<List<AppPost>> listPost() {
-        List<AppPost> posts = postService.listPosts();
-        return ResponseEntity.ok(posts);
-    } */
+    /*
+     * @GetMapping
+     * public ResponseEntity<List<AppPost>> listPost() {
+     * List<AppPost> posts = postService.listPosts();
+     * return ResponseEntity.ok(posts);
+     * }
+     */
 
     // Listar posts, opcionalmente por categoría
     @GetMapping
@@ -78,4 +80,12 @@ public class AppPostController {
         }
         return ResponseEntity.ok(posts);
     }
+
+    /* ADICIONALES */
+    @PutMapping("/{idPost}/view")
+    public ResponseEntity<Void> sumarVisualizacion(@PathVariable Long idPost) {
+        postService.sumarVisualizacion(idPost);
+        return ResponseEntity.ok().build();
+    }
+
 }

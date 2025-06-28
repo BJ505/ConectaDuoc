@@ -31,7 +31,7 @@ public class PostCategoryController {
     @GetMapping
     public ResponseEntity<List<PostCategory>> listPostCategory() {
         List<PostCategory> postCategories = postCategoryService.listPostCategory();
-        System.out.println("CATEGORÍAS LEÍDAS: " + postCategories.size());
+        //System.out.println("CATEGORÍAS LEÍDAS: " + postCategories.size());
         return ResponseEntity.ok(postCategories);
     }
 

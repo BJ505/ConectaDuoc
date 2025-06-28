@@ -30,4 +30,9 @@ public class AppUserService {
         usuarioRepository.deleteByEmail(email);
     }
 
+    /* ADICIONALES */
+    public Optional<AppUser> obtenerUsuarioPorId(Long idUser) {
+        return usuarioRepository.findByIdUser(idUser);
+    }
+
 }
