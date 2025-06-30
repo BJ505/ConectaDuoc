@@ -5,6 +5,8 @@ C:\Users\Pablo\Documents\DUOC UC\ConectaDuoc\src\main\java\com\conectaduoc\contr
 C:\Users\Pablo\Documents\DUOC UC\ConectaDuoc\src\main\java\com\conectaduoc\controller\PostCategoryController.java
 C:\Users\Pablo\Documents\DUOC UC\ConectaDuoc\src\main\java\com\conectaduoc\controller\PostCommentController.java
 C:\Users\Pablo\Documents\DUOC UC\ConectaDuoc\src\main\java\com\conectaduoc\controller\PostReportController.java
+C:\Users\Pablo\Documents\DUOC UC\ConectaDuoc\src\main\java\com\conectaduoc\controller\PostScoreController1.java
+C:\Users\Pablo\Documents\DUOC UC\ConectaDuoc\src\main\java\com\conectaduoc\dto\ScoreResumenDTO.java
 C:\Users\Pablo\Documents\DUOC UC\ConectaDuoc\src\main\java\com\conectaduoc\exception\GlobalExceptionHandler.java
 C:\Users\Pablo\Documents\DUOC UC\ConectaDuoc\src\main\java\com\conectaduoc\exception\ResourceNotFoundException.java
 C:\Users\Pablo\Documents\DUOC UC\ConectaDuoc\src\main\java\com\conectaduoc\model\AppPost.java

@@ -12,12 +12,14 @@ com\conectaduoc\controller\PostCategoryController.class
 com\conectaduoc\controller\PostCommentController.class
 com\conectaduoc\controller\AppUserController.class
 com\conectaduoc\service\AppPostService.class
+com\conectaduoc\dto\ScoreResumenDTO.class
 com\conectaduoc\repository\PostReportRepository.class
 com\conectaduoc\model\PostComment.class
 com\conectaduoc\controller\PostReportController.class
 com\conectaduoc\model\AppUser.class
 com\conectaduoc\repository\PostCommentRepository.class
 com\conectaduoc\repository\AppPostRepository.class
+com\conectaduoc\controller\PostScoreController1.class
 com\conectaduoc\model\PostReport.class
 com\conectaduoc\service\AppUserService.class
 com\conectaduoc\config\WebConfig.class

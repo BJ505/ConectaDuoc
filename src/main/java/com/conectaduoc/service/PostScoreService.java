@@ -11,37 +11,36 @@ import com.conectaduoc.repository.PostScoreRepository;
 
 @Service
 public class PostScoreService {
-    
+
     @Autowired
-    private PostScoreRepository PostScoreRepository;
+    private PostScoreRepository postScoreRepository;
 
     public List<PostScore> listScores() {
-        return PostScoreRepository.findAll();
+        return postScoreRepository.findAll();
     }
 
     public Optional<PostScore> getScore(Long id) {
-        return PostScoreRepository.findById(id);
+        return postScoreRepository.findById(id);
     }
 
     public PostScore saveScore(PostScore score) {
-        return PostScoreRepository.save(score);
+        return postScoreRepository.save(score);
     }
 
     public void deleteScore(Long id) {
-        PostScoreRepository.deleteById(id);
+        postScoreRepository.deleteById(id);
     }
 
     public List<PostScore> findByIdPost(Long idPost) {
-        return PostScoreRepository.findByIdPost(idPost);
+        return postScoreRepository.findByIdPost(idPost);
     }
 
     public List<PostScore> findByIdUser(Long idUser) {
-        return PostScoreRepository.findByIdUser(idUser);
+        return postScoreRepository.findByIdUser(idUser);
     }
 
     public PostScore findByIdUserAndIdPost(Long idUser, Long idPost) {
-        return PostScoreRepository.findByIdUserAndIdPost(idUser, idPost);
+        return postScoreRepository.findByIdUserAndIdPost(idUser, idPost);
     }
 
-    
 }
