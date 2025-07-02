@@ -72,8 +72,9 @@ public class AppUserController {
                 .orElseThrow(
                         () -> new ResourceNotFoundException("El usuario con email " + email + " no fue encontrado."));
 
-        usuario.setEmail(detallesUsuario.getEmail());
+        usuario.setName(detallesUsuario.getName());
         usuario.setRole(detallesUsuario.getRole());
+        usuario.setCenter(detallesUsuario.getCenter());
         AppUser usuarioActualizado = usuarioService.guardarUsuario(usuario);
         return ResponseEntity.ok(usuarioActualizado);
     }

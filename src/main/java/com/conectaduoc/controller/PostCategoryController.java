@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,7 +33,7 @@ public class PostCategoryController {
     @GetMapping
     public ResponseEntity<List<PostCategory>> listPostCategory() {
         List<PostCategory> postCategories = postCategoryService.listPostCategory();
-        //System.out.println("CATEGORÍAS LEÍDAS: " + postCategories.size());
+        // System.out.println("CATEGORÍAS LEÍDAS: " + postCategories.size());
         return ResponseEntity.ok(postCategories);
     }
 
@@ -51,30 +53,28 @@ public class PostCategoryController {
     }
 
     // Eliminar una categoría de publicación por su ID con manejo de excepción
-    @GetMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminarPostCategory(@PathVariable Long id) {
-        // Verifica si la categoría de publicación existe, si no, lanza la excepción
         postCategoryService.getPostCategory(id)
                 .orElseThrow(() -> new ResourceNotFoundException(
                         "La categoría de publicación con ID " + id + " no fue encontrada."));
 
-        // Elimina la categoría de publicación si existe
         postCategoryService.DeletePostCategory(id);
 
-        return ResponseEntity.noContent().build(); // Devolver 204 No Content
+        return ResponseEntity.noContent().build(); // 204 No Content
     }
 
     // Actualizar una categoría de publicación existente con manejo de excepción
-    @PostMapping("/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<PostCategory> actualizarPostCategory(@PathVariable Long id,
             @Valid @RequestBody PostCategory postCategoryDetails) {
         PostCategory postCategory = postCategoryService.getPostCategory(id)
                 .orElseThrow(() -> new ResourceNotFoundException(
                         "La categoría de publicación con ID " + id + " no fue encontrada."));
 
-        // Actualizar los campos necesarios
         postCategory.setName(postCategoryDetails.getName());
         postCategory.setDescription(postCategoryDetails.getDescription());
+        postCategory.setStatus(postCategoryDetails.getStatus());
 
         PostCategory updatedPostCategory = postCategoryService.savPostCategory(postCategory);
         return ResponseEntity.ok(updatedPostCategory);
