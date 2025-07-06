@@ -44,6 +44,13 @@ public class PostCommentController {
         return ResponseEntity.ok(Comment);
     }
 
+    // Obtener comentarios por ID de post
+    @GetMapping("/post/{idPost}")
+    public ResponseEntity<List<PostComment>> obtenerComentariosPorPost(@PathVariable Long idPost) {
+        List<PostComment> comentarios = comentarioService.getCommentsByPostId(idPost);
+        return ResponseEntity.ok(comentarios);
+    }
+
     // Eliminar un comentario por su ID con manejo de excepción
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminarComentario(@PathVariable Long id) {

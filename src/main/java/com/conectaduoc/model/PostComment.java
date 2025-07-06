@@ -3,6 +3,8 @@ package com.conectaduoc.model;
 import java.util.Date;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 
@@ -10,13 +12,14 @@ import jakarta.validation.constraints.NotNull;
 public class PostComment {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_POST_COMMENT")
     private Long idComment;
 
     @NotNull(message = "El idUser no puede ser nulo")
-    private int idUser;
+    private Long idUser;
 
     @NotNull(message = "El idPost no puede ser nulo")
-    private int idPost;
+    private Long idPost;
 
     @NotNull(message = "El contenido no puede ser vacío")
     private String content;
@@ -32,17 +35,17 @@ public class PostComment {
         this.idComment = idComment;
     }
 
-    public int getIdUser() {
+    public Long getIdUser() {
         return idUser;
     }
-    public void setIdUser(int idUser) {
+    public void setIdUser(Long idUser) {
         this.idUser = idUser;
     }
 
-    public int getIdPost() {
+    public Long getIdPost() {
         return idPost;
     }
-    public void setIdPost(int idPost) {
+    public void setIdPost(Long idPost) {
         this.idPost = idPost;
     }
 
