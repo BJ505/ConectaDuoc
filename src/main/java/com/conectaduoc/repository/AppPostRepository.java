@@ -8,7 +8,7 @@ import com.conectaduoc.model.AppPost;
 
 public interface AppPostRepository extends JpaRepository<AppPost, Long> {
     // Método para encontrar posts por idUser
-    List<AppPost> findByIdUser(int idUser);
+    List<AppPost> findByIdUser(long idUser);
 
     // Método para encontrar posts por idCategory
     List<AppPost> findByIdCategory(Long idCategory);

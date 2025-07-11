@@ -29,7 +29,7 @@ public class PostCategory {
 
     @NotNull(message = "El estado no puede estar vacío")
     @Column(name = "STATUS")
-    private int status;
+    private Integer status;
 
     public PostCategory() {
     }
@@ -62,7 +62,7 @@ public class PostCategory {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 }

@@ -18,6 +18,10 @@ public class AppUserService {
         return usuarioRepository.findAll();
     }
 
+    public Optional<AppUser> obtenerUsuarioPorId(Long idUser) {
+        return usuarioRepository.findById(idUser);
+    }
+
     public Optional<AppUser> obtenerUsuarioPorEmail(String email) {
         return usuarioRepository.findByEmail(email);
     }
@@ -26,13 +30,8 @@ public class AppUserService {
         return usuarioRepository.save(usuario);
     }
 
-    public void eliminarUsuario(String email) {
-        usuarioRepository.deleteByEmail(email);
-    }
-
-    /* ADICIONALES */
-    public Optional<AppUser> obtenerUsuarioPorId(Long idUser) {
-        return usuarioRepository.findByIdUser(idUser);
+    public void eliminarUsuario(Long idUser) {
+        usuarioRepository.deleteById(idUser);
     }
 
 }

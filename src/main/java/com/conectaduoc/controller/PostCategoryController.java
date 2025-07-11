@@ -59,7 +59,7 @@ public class PostCategoryController {
                 .orElseThrow(() -> new ResourceNotFoundException(
                         "La categoría de publicación con ID " + id + " no fue encontrada."));
 
-        postCategoryService.DeletePostCategory(id);
+        postCategoryService.deletePostCategory(id);
 
         return ResponseEntity.noContent().build(); // 204 No Content
     }
@@ -78,11 +78,5 @@ public class PostCategoryController {
 
         PostCategory updatedPostCategory = postCategoryService.savPostCategory(postCategory);
         return ResponseEntity.ok(updatedPostCategory);
-    }
-
-    @GetMapping("/test-categories")
-    public String testCategories() {
-        List<PostCategory> all = postCategoryService.listPostCategory();
-        return "Hay " + all.size() + " categorías.";
     }
 }

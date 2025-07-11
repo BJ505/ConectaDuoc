@@ -59,7 +59,7 @@ public class PostCommentController {
                 .orElseThrow(() -> new ResourceNotFoundException("El Comment con ID " + id + " no fue encontrado."));
 
         // Elimina el comentario si existe
-        comentarioService.DeleteComment(id);
+        comentarioService.deleteComment(id);
 
         return ResponseEntity.noContent().build(); // Devolver 204 No Content
     }

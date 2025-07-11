@@ -28,7 +28,7 @@ public class PostCategoryService {
         return postCategoryRepository.save(comentario);
     }
 
-    public void DeletePostCategory(Long id) {
+    public void deletePostCategory(Long id) {
         postCategoryRepository.deleteById(id);
     }
 }

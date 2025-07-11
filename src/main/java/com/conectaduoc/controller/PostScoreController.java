@@ -23,7 +23,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/score")
 @Validated
-public class PostScoreController1 {
+public class PostScoreController {
 
     @Autowired
     private PostScoreService scoreService;
@@ -46,12 +46,11 @@ public class PostScoreController1 {
 
     @PostMapping("/save")
     public ResponseEntity<PostScore> saveScore(@Valid @RequestBody PostScore score) {
-        List<PostScore> existentes = scoreRepository.findByIdPostAndIdUser(score.getIdPost(), score.getIdUser());
+        PostScore existente = scoreRepository.findByIdUserAndIdPost(score.getIdUser(), score.getIdPost());
 
         PostScore resultado;
-        if (!existentes.isEmpty()) {
+        if (existente != null) {
             // ya existe → actualizar
-            PostScore existente = existentes.get(0);
             existente.setScore(score.getScore());
             resultado = scoreRepository.save(existente);
         } else {
@@ -103,8 +102,8 @@ public class PostScoreController1 {
                 Double promedio = Optional.ofNullable(
                         scoreRepository.getAverageScore(idPost)).orElse(0.0);
 
-                List<PostScore> miScores = scoreRepository.findByIdPostAndIdUser(idPost, idUser);
-                Integer scoreValue = miScores.isEmpty() ? null : miScores.get(0).getScore();
+                PostScore miScore = scoreRepository.findByIdUserAndIdPost(idUser, idPost);
+                Integer scoreValue = (miScore == null) ? null : miScore.getScore();
 
                 resumenes.add(new ScoreResumenDTO(idPost, promedio, scoreValue));
             }

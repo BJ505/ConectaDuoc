@@ -43,34 +43,34 @@ public class AppUserController {
     }
 
     // Obtener un usuario por su ID con manejo de excepción
-    @GetMapping("/{email}")
-    public ResponseEntity<AppUser> obtenerUsuarioPorEmail(@PathVariable String email) {
-        AppUser usuario = usuarioService.obtenerUsuarioPorEmail(email)
-                .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado con email: " + email));
+    @GetMapping("/{idUser}")
+    public ResponseEntity<AppUser> obtenerUsuarioPorId(@PathVariable Long idUser) {
+        AppUser usuario = usuarioService.obtenerUsuarioPorId(idUser)
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado con id: " + idUser));
         return ResponseEntity.ok(usuario);
     }
 
     // Eliminar un usuario por su email con manejo de excepción
-    @DeleteMapping("/{email}")
-    public ResponseEntity<Void> eliminarUsuario(@PathVariable String email) {
+    @DeleteMapping("/{idUser}")
+    public ResponseEntity<Void> eliminarUsuario(@PathVariable Long idUser) {
         // Verifica si el usuario existe, si no, lanza la excepción
-        usuarioService.obtenerUsuarioPorEmail(email)
+        usuarioService.obtenerUsuarioPorId(idUser)
                 .orElseThrow(
-                        () -> new ResourceNotFoundException("El usuario con email " + email + " no fue encontrado."));
+                        () -> new ResourceNotFoundException("El usuario con id " + idUser + " no fue encontrado."));
 
         // Elimina el usuario si existe
-        usuarioService.eliminarUsuario(email);
+        usuarioService.eliminarUsuario(idUser);
 
         return ResponseEntity.noContent().build(); // Devolver 204 No Content
     }
 
     // Actualizar un usuario existente con manejo de excepción
-    @PutMapping("/{email}")
-    public ResponseEntity<AppUser> actualizarUsuario(@PathVariable String email,
+    @PutMapping("/{idUsuario}")
+    public ResponseEntity<AppUser> actualizarUsuario(@PathVariable Long idUsuario,
             @Valid @RequestBody AppUser detallesUsuario) {
-        AppUser usuario = usuarioService.obtenerUsuarioPorEmail(email)
+        AppUser usuario = usuarioService.obtenerUsuarioPorId(idUsuario)
                 .orElseThrow(
-                        () -> new ResourceNotFoundException("El usuario con email " + email + " no fue encontrado."));
+                        () -> new ResourceNotFoundException("El usuario con id " + idUsuario + " no fue encontrado."));
 
         usuario.setName(detallesUsuario.getName());
         usuario.setRole(detallesUsuario.getRole());
@@ -88,7 +88,7 @@ public class AppUserController {
 
     // Obtener un usuario por su ID (numérico) con manejo de excepción
     @GetMapping("/id/{idUser}")
-    public ResponseEntity<AppUser> obtenerUsuarioPorId(@PathVariable Long idUser) {
+    public ResponseEntity<AppUser> obtenerUsuarioPorIdNumerico(@PathVariable Long idUser) {
         AppUser usuario = usuarioService.obtenerUsuarioPorId(idUser)
                 .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado con id: " + idUser));
         return ResponseEntity.ok(usuario);

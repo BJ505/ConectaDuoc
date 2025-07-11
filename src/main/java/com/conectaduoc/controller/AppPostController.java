@@ -22,15 +22,6 @@ public class AppPostController {
     @Autowired
     private AppPostService postService;
 
-    // Listar todos los posts
-    /*
-     * @GetMapping
-     * public ResponseEntity<List<AppPost>> listPost() {
-     * List<AppPost> posts = postService.listPosts();
-     * return ResponseEntity.ok(posts);
-     * }
-     */
-
     // Listar posts, opcionalmente por categoría
     @GetMapping
     public ResponseEntity<List<AppPost>> listPost(@RequestParam(required = false) Long idCategory) {

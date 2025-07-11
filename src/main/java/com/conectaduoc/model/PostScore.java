@@ -15,6 +15,7 @@ public class PostScore {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idScore;
 
+    
     @NotNull(message = "El id del usuario no puede ser nulo")
     private Long idUser;
 
