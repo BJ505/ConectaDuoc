@@ -1,6 +1,8 @@
 package com.conectaduoc.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -81,10 +83,21 @@ public class AppUserController {
 
     /* Endpoints Adicionales */
     @GetMapping("/exists/{email}")
-    public ResponseEntity<Boolean> checkUserExists(@PathVariable String email) {
-        boolean exists = usuarioService.obtenerUsuarioPorEmail(email).isPresent();
-        return ResponseEntity.ok(exists);
-    }
+    public ResponseEntity<Map<String, Object>> checkUserExists(@PathVariable String email) {
+        return usuarioService.obtenerUsuarioPorEmail(email)
+            .map(usuario -> {
+                Map<String, Object> response = new HashMap<>();
+                response.put("exists", true);
+                response.put("idUser", usuario.getIdUser());
+                return ResponseEntity.ok(response);
+            })
+            .orElseGet(() -> {
+                Map<String, Object> response = new HashMap<>();
+                response.put("exists", false);
+                response.put("idUser", null);
+                return ResponseEntity.ok(response);
+        });
+}
 
     // Obtener un usuario por su ID (numérico) con manejo de excepción
     @GetMapping("/id/{idUser}")
